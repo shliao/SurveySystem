@@ -6,8 +6,7 @@ namespace SurveySystem.ORM.DBModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Survey")]
-    public partial class Survey
+    public partial class SurveyDetails
     {
         [Key]
         [Column(Order = 0)]
@@ -18,16 +17,8 @@ namespace SurveySystem.ORM.DBModels
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int QuestionnaireID { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
         [StringLength(50)]
-        public string Caption { get; set; }
-
-        [Key]
-        [Column(Order = 3)]
-        public DateTime CreatDate { get; set; }
-
-        public DateTime? EndDate { get; set; }
+        public string Answer { get; set; }
 
         public virtual Questionnaire Questionnaire { get; set; }
 

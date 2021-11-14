@@ -19,6 +19,6 @@ namespace SurveySystem.ORM.DBModels
         [StringLength(50)]
         public string Password { get; set; }
 
-        public int Status { get; set; }
+        public int AccStatus { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace SurveySystem.ORM.DBModels
         public UserInfo()
         {
             Survey = new HashSet<Survey>();
+            SurveyDetails = new HashSet<SurveyDetails>();
         }
 
         public Guid UserInfoID { get; set; }
@@ -35,5 +36,8 @@ namespace SurveySystem.ORM.DBModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Survey> Survey { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SurveyDetails> SurveyDetails { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace SurveySystem
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            this.gv_list.DataSource = ListManager.GetQuestionnaireID();
+            this.gv_list.DataSource = ListManager.GetQuestionnaire();
             this.gv_list.DataBind();
 
         }

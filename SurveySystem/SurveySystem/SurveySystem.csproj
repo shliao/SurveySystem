@@ -78,6 +78,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Form.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Photo\Working.jpg" />
     <Content Include="Script\jQuery-min-3.6.0.js" />
     <Content Include="Stastic.aspx" />
     <Content Include="SystemAdmin\Detail.aspx" />

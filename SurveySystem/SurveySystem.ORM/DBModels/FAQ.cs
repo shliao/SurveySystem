@@ -13,7 +13,9 @@ namespace SurveySystem.ORM.DBModels
         [StringLength(50)]
         public string CustomName { get; set; }
 
-        public int AnswerType { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string FAQType { get; set; }
 
         [Required]
         [StringLength(50)]

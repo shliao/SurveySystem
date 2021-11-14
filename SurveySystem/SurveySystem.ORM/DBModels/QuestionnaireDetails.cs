@@ -9,29 +9,25 @@ namespace SurveySystem.ORM.DBModels
     public partial class QuestionnaireDetails
     {
         [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int QDID { get; set; }
+
         public int QuestionnaireID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int AnswerType { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string QuestionType { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Required]
         [StringLength(50)]
         public string Question { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
+        [Required]
         [StringLength(50)]
         public string QOption { get; set; }
 
-        [Key]
-        [Column(Order = 4)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Required { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string Required { get; set; }
 
         public virtual Questionnaire Questionnaire { get; set; }
     }
