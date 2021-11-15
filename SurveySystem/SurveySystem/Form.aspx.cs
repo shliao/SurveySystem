@@ -1,6 +1,9 @@
 ﻿using SurveySystem.DBsource;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -28,29 +31,39 @@ namespace SurveySystem
                 this.ltlQContent.Text = questionnaire_View.QContent;
             }
 
-            var list = ListManager.GetQuestionnaireDetails(questionnaireid);
-            var count = list.Count();
-            Table1.Rows.Clear();
+            var reptQ = ListManager.GetQuestionnaireDetails(questionnaireid);
+            this.reptQuestionnaire.DataSource = reptQ;
+            this.reptQuestionnaire.DataBind();
 
-            for(int i = 0; i < count; i++)
+        }
+
+        public string Split(string str)
+        {
+            string[] param = str.Split(';');
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            for (int i = 0; i < param.Length; i++)
             {
-                for (int j = 0; j < count; j++)
+                sb.Append(string.Format(param[i]));
+
+                if (i != param.Length - 1)
                 {
-                    TableRow row = new TableRow();
-                    TableCell cell = new TableCell();
-                    row.Cells.Add(cell);
-                    Table1.Rows.Add(row);
-
-                    RadioButton btn2 = new RadioButton();
-                    btn2.ID = "rbn" + i; //需要加入ID才不會第一次按鈕無反應
-                    btn2.Text = "rbn" + i;
-
-                    cell = new TableCell();
-                    cell.Controls.Add(btn2);//在此欄加入按鈕
-                    row.Cells.Add(cell);
-                    Table1.Rows.Add(row);
+                    sb.Append("<br>");
                 }
             }
+
+            return sb.ToString();
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

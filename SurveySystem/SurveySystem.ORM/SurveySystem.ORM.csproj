@@ -59,6 +59,7 @@
     <Compile Include="DBModels\SurveyDetails.cs" />
     <Compile Include="DBModels\Survey_View.cs" />
     <Compile Include="DBModels\UserInfo.cs" />
+    <Compile Include="DBModels\UserInfoSurvey_View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

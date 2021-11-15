@@ -24,5 +24,21 @@
     <asp:Literal ID="ltlAge" runat="server">年齡</asp:Literal>
     <asp:TextBox ID="txbAge" runat="server"></asp:TextBox>
     <br />
-    <asp:Table ID="Table1" runat="server"></asp:Table>
+    <asp:Repeater ID="reptQuestionnaire" runat="server">
+        <HeaderTemplate>
+        </HeaderTemplate>
+        <ItemTemplate>
+            <%# Container.ItemIndex + 1 %>
+            <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />
+            <asp:Literal ID="ltlQOption" runat="server" Text='<%# Split(Eval("QOption").ToString()) %>'></asp:Literal>
+        </ItemTemplate>
+        <FooterTemplate>
+        </FooterTemplate>
+        <SeparatorTemplate>
+            <hr />
+        </SeparatorTemplate>
+    </asp:Repeater>
+    <br />
+    <asp:Button ID="btnCancel" runat="server" Text="取消" OnClick="btnCancel_Click" />
+    <asp:Button ID="btnSave" runat="server" Text="送出" OnClick="btnSave_Click" />
 </asp:Content>

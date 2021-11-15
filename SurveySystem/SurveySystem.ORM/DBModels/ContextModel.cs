@@ -20,6 +20,7 @@ namespace SurveySystem.ORM.DBModels
         public virtual DbSet<Survey> Survey { get; set; }
         public virtual DbSet<SurveyDetails> SurveyDetails { get; set; }
         public virtual DbSet<Survey_View> Survey_View { get; set; }
+        public virtual DbSet<UserInfoSurvey_View> UserInfoSurvey_View { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -69,6 +70,14 @@ namespace SurveySystem.ORM.DBModels
                 .IsUnicode(false);
 
             modelBuilder.Entity<Survey_View>()
+                .Property(e => e.Age)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<UserInfoSurvey_View>()
+                .Property(e => e.MobilePhone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<UserInfoSurvey_View>()
                 .Property(e => e.Age)
                 .IsUnicode(false);
         }

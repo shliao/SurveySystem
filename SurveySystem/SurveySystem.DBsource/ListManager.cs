@@ -90,13 +90,13 @@ namespace SurveySystem.DBsource
                 }
             }
         }
-        public static Survey_View GetSurveyUser(int userinfoid)
+        public static UserInfoSurvey_View GetSurveyUser(int userinfoid)
         {
             using (ContextModel context = new ContextModel())
             {
                 try
                 {
-                    var query = (from item in context.Survey_View
+                    var query = (from item in context.UserInfoSurvey_View
                                  where item.QuestionnaireID == userinfoid
                                  select item).FirstOrDefault();
 
