@@ -25,15 +25,11 @@
     <asp:TextBox ID="txbAge" runat="server"></asp:TextBox>
     <br />
     <asp:Repeater ID="reptQuestionnaire" runat="server">
-        <HeaderTemplate>
-        </HeaderTemplate>
         <ItemTemplate>
             <%# Container.ItemIndex + 1 %>
             <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />
-            <asp:Literal ID="ltlQOption" runat="server" Text='<%# Split(Eval("QOption").ToString()) %>'></asp:Literal>
+            <asp:Literal ID="ltlQOption" runat="server" Text='<%# Split(Eval("QuestionType").ToString(),Eval("QDID").ToString(),Eval("QOption").ToString()) %>'></asp:Literal>
         </ItemTemplate>
-        <FooterTemplate>
-        </FooterTemplate>
         <SeparatorTemplate>
             <hr />
         </SeparatorTemplate>
