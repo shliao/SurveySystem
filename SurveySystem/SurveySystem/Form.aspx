@@ -24,15 +24,29 @@
     <asp:Literal ID="ltlAge" runat="server">年齡</asp:Literal>
     <asp:TextBox ID="txbAge" runat="server"></asp:TextBox>
     <br />
-    <asp:Repeater ID="reptQuestionnaire" runat="server">
+    <asp:Repeater ID="reptQuestionnaire" runat="server" OnItemDataBound="reptQuestionnaire_ItemDataBound">
         <ItemTemplate>
-            <%# Container.ItemIndex + 1 %>
-            <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />
-            <asp:Literal ID="ltlQOption" runat="server" Text='<%# Split(Eval("QuestionType").ToString(),Eval("QDID").ToString(),Eval("QOption").ToString()) %>'></asp:Literal>
+            <td><%# Container.ItemIndex + 1 %></td><br />
+            <asp:Literal ID="ltlQDID" runat="server" Text='<%# Eval("QDID") %>'></asp:Literal><td></td><br />
+            <td><%# Eval("QuestionType") %></td><br />
+            <td><%# Eval("Question") %></td><br />
+            
+<%--            <asp:Literal ID="ltlQDID" runat="server" Text='<%# Eval("QDID") %>'></asp:Literal>
+            <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />--%>
+            <%--<asp:Literal ID="ltlQOption" runat="server" Text='<%# Split(Eval("QuestionType").ToString(),Eval("QDID").ToString(),Eval("QOption").ToString()) %>'></asp:Literal>--%>
+            
+            <% if (Eval("QuestionType").ToString() == "單選題") {%>
+            <asp:RadioButton ID="RadioButton1" runat="server" />
+            <% } %>
+            <asp:Repeater ID="reptQOption" runat="server">
+                <ItemTemplate>
+                    <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
+                </ItemTemplate>
+                <SeparatorTemplate>
+                    <hr />
+                </SeparatorTemplate>
+            </asp:Repeater>
         </ItemTemplate>
-        <SeparatorTemplate>
-            <hr />
-        </SeparatorTemplate>
     </asp:Repeater>
     <br />
     <asp:Button ID="btnCancel" runat="server" Text="取消" OnClick="btnCancel_Click" />

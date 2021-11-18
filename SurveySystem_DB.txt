@@ -1,0 +1,664 @@
+USE [master]
+GO
+/****** Object:  Database [SurveySystem]    Script Date: 2021/11/18 上午 11:40:08 ******/
+CREATE DATABASE [SurveySystem]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'SurveySystem', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\SurveySystem.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'SurveySystem_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\SurveySystem_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [SurveySystem] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [SurveySystem].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [SurveySystem] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [SurveySystem] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [SurveySystem] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [SurveySystem] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [SurveySystem] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [SurveySystem] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [SurveySystem] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [SurveySystem] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [SurveySystem] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [SurveySystem] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [SurveySystem] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [SurveySystem] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [SurveySystem] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [SurveySystem] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [SurveySystem] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [SurveySystem] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [SurveySystem] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [SurveySystem] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [SurveySystem] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [SurveySystem] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [SurveySystem] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [SurveySystem] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [SurveySystem] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [SurveySystem] SET  MULTI_USER 
+GO
+ALTER DATABASE [SurveySystem] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [SurveySystem] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [SurveySystem] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [SurveySystem] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [SurveySystem] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [SurveySystem] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [SurveySystem] SET QUERY_STORE = OFF
+GO
+USE [SurveySystem]
+GO
+/****** Object:  Table [dbo].[UserInfo]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserInfo](
+	[UserInfoID] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[MobilePhone] [varchar](10) NOT NULL,
+	[Email] [nvarchar](100) NOT NULL,
+	[Age] [varchar](3) NOT NULL,
+ CONSTRAINT [PK_UserInfo] PRIMARY KEY CLUSTERED 
+(
+	[UserInfoID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Survey]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Survey](
+	[UserInfoID] [uniqueidentifier] NOT NULL,
+	[QuestionnaireID] [int] NOT NULL,
+	[Caption] [nvarchar](50) NOT NULL,
+	[CreatDate] [datetime] NOT NULL,
+	[EndDate] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Questionnaire]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Questionnaire](
+	[QuestionnaireID] [int] IDENTITY(1,1) NOT NULL,
+	[Caption] [nvarchar](50) NOT NULL,
+	[QContent] [nvarchar](500) NOT NULL,
+	[StartDate] [datetime] NOT NULL,
+	[EndDate] [datetime] NULL,
+	[Status] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Questionnaire_1] PRIMARY KEY CLUSTERED 
+(
+	[QuestionnaireID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SurveyDetails]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SurveyDetails](
+	[UserInfoID] [uniqueidentifier] NOT NULL,
+	[QuestionnaireID] [int] NOT NULL,
+	[Answer] [nvarchar](50) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[QuestionnaireDetails]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[QuestionnaireDetails](
+	[QDID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionnaireID] [int] NOT NULL,
+	[QuestionType] [nvarchar](50) NOT NULL,
+	[Question] [nvarchar](50) NOT NULL,
+	[QOption] [nvarchar](50) NOT NULL,
+	[Required] [nvarchar](10) NOT NULL,
+ CONSTRAINT [PK_QuestionnaireDetails] PRIMARY KEY CLUSTERED 
+(
+	[QDID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[Survey_View]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[Survey_View]
+AS
+SELECT  dbo.Survey.UserInfoID, dbo.Survey.QuestionnaireID, dbo.Survey.Caption, dbo.Survey.CreatDate, dbo.Survey.EndDate, dbo.UserInfo.UserInfoID AS Expr1, 
+               dbo.UserInfo.Name, dbo.UserInfo.MobilePhone, dbo.UserInfo.Email, dbo.UserInfo.Age, dbo.SurveyDetails.UserInfoID AS Expr2, 
+               dbo.SurveyDetails.QuestionnaireID AS Expr3, dbo.SurveyDetails.Answer, dbo.Questionnaire.QuestionnaireID AS Expr4, 
+               dbo.Questionnaire.Caption AS Expr5, dbo.Questionnaire.QContent, dbo.Questionnaire.StartDate, dbo.Questionnaire.EndDate AS Expr6, 
+               dbo.Questionnaire.Status, dbo.QuestionnaireDetails.QDID, dbo.QuestionnaireDetails.QuestionnaireID AS Expr7, dbo.QuestionnaireDetails.QuestionType, 
+               dbo.QuestionnaireDetails.Question, dbo.QuestionnaireDetails.QOption, dbo.QuestionnaireDetails.Required
+FROM     dbo.Survey INNER JOIN
+               dbo.UserInfo ON dbo.Survey.UserInfoID = dbo.UserInfo.UserInfoID INNER JOIN
+               dbo.SurveyDetails ON dbo.UserInfo.UserInfoID = dbo.SurveyDetails.UserInfoID INNER JOIN
+               dbo.Questionnaire ON dbo.Survey.QuestionnaireID = dbo.Questionnaire.QuestionnaireID AND 
+               dbo.SurveyDetails.QuestionnaireID = dbo.Questionnaire.QuestionnaireID INNER JOIN
+               dbo.QuestionnaireDetails ON dbo.Questionnaire.QuestionnaireID = dbo.QuestionnaireDetails.QuestionnaireID
+GO
+/****** Object:  View [dbo].[UserInfoSurvey_View]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[UserInfoSurvey_View]
+AS
+SELECT  dbo.Survey.UserInfoID, dbo.Survey.QuestionnaireID, dbo.Survey.Caption, dbo.Survey.CreatDate, dbo.Survey.EndDate, dbo.UserInfo.UserInfoID AS Expr1, 
+               dbo.UserInfo.Name, dbo.UserInfo.MobilePhone, dbo.UserInfo.Email, dbo.UserInfo.Age
+FROM     dbo.Survey INNER JOIN
+               dbo.UserInfo ON dbo.Survey.UserInfoID = dbo.UserInfo.UserInfoID
+GO
+/****** Object:  Table [dbo].[AcInfo]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AcInfo](
+	[AcInfoID] [uniqueidentifier] NOT NULL,
+	[Account] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[AccStatus] [int] NOT NULL,
+ CONSTRAINT [PK_AcInfo] PRIMARY KEY CLUSTERED 
+(
+	[AcInfoID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[FAQ]    Script Date: 2021/11/18 上午 11:40:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[FAQ](
+	[CustomName] [nvarchar](50) NOT NULL,
+	[FAQType] [nvarchar](50) NOT NULL,
+	[Question] [nvarchar](50) NOT NULL,
+	[FOption] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_FAQ] PRIMARY KEY CLUSTERED 
+(
+	[CustomName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[AcInfo] ([AcInfoID], [Account], [Password], [AccStatus]) VALUES (N'2981d8ed-a096-40f4-b25a-b3410681930d', N'admin2', N'12345678', 1)
+GO
+INSERT [dbo].[AcInfo] ([AcInfoID], [Account], [Password], [AccStatus]) VALUES (N'9a924aca-36bf-4d3c-9311-f1443f5c73d3', N'admin', N'qwer1234', 0)
+GO
+INSERT [dbo].[FAQ] ([CustomName], [FAQType], [Question], [FOption]) VALUES (N'常用自訂問題1', N'單選題', N'以台灣大範圍劃分，你居住在?', N'北部;中部;南部')
+GO
+INSERT [dbo].[FAQ] ([CustomName], [FAQType], [Question], [FOption]) VALUES (N'常用自訂問題2', N'單選題', N'以台灣大範圍劃分，你想居住在?', N'北部;中部;南部')
+GO
+INSERT [dbo].[FAQ] ([CustomName], [FAQType], [Question], [FOption]) VALUES (N'常用自訂問題3', N'單選題', N'你的生理性別是?', N'男性;女性')
+GO
+INSERT [dbo].[FAQ] ([CustomName], [FAQType], [Question], [FOption]) VALUES (N'常用自訂問題4', N'複選題', N'以下何物是你不能沒有的?', N'電視;電腦;手機;平板')
+GO
+INSERT [dbo].[FAQ] ([CustomName], [FAQType], [Question], [FOption]) VALUES (N'常用自訂問題5', N'複選題', N'以下最不想去居住的國家?', N'南非;韓國;越南;美國')
+GO
+SET IDENTITY_INSERT [dbo].[Questionnaire] ON 
+GO
+INSERT [dbo].[Questionnaire] ([QuestionnaireID], [Caption], [QContent], [StartDate], [EndDate], [Status]) VALUES (1, N'旅行調查', N'疫情過後的旅行議題', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL, N'啟用')
+GO
+INSERT [dbo].[Questionnaire] ([QuestionnaireID], [Caption], [QContent], [StartDate], [EndDate], [Status]) VALUES (2, N'居住調查', N'理想中的居住位置', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL, N'啟用')
+GO
+INSERT [dbo].[Questionnaire] ([QuestionnaireID], [Caption], [QContent], [StartDate], [EndDate], [Status]) VALUES (3, N'飲食調查', N'平常愛吃的事', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL, N'啟用')
+GO
+INSERT [dbo].[Questionnaire] ([QuestionnaireID], [Caption], [QContent], [StartDate], [EndDate], [Status]) VALUES (4, N'收入調查', N'對於現在收入的滿意度', CAST(N'2021-10-24T00:00:00.000' AS DateTime), CAST(N'2021-11-29T00:00:00.000' AS DateTime), N'啟用')
+GO
+INSERT [dbo].[Questionnaire] ([QuestionnaireID], [Caption], [QContent], [StartDate], [EndDate], [Status]) VALUES (5, N'人際關係調查', N'你身邊最好的朋友', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL, N'啟用')
+GO
+INSERT [dbo].[Questionnaire] ([QuestionnaireID], [Caption], [QContent], [StartDate], [EndDate], [Status]) VALUES (8, N'旅行調查Test', N'我來測試的', CAST(N'2021-11-18T09:31:03.897' AS DateTime), NULL, N'啟用')
+GO
+SET IDENTITY_INSERT [dbo].[Questionnaire] OFF
+GO
+SET IDENTITY_INSERT [dbo].[QuestionnaireDetails] ON 
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (1, 1, N'單選題', N'疫情前你最想去的國家?', N'德國;美國;義大利;西藏', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (2, 1, N'單選題', N'疫情後你最想去的國家?', N'新加坡;日本;香港;馬來西亞', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (3, 1, N'文字', N'你今年本來預計要去的國家?', N'', N'1')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (4, 2, N'複選題', N'以下哪一個是你嚮往居住的地方?(複選)', N'西班牙;法國;日本;韓國', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (5, 2, N'單選題', N'你對現在住所的滿意程度?(1~5分)', N'1;2;3;4;5', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (6, 3, N'複選題', N'以下食物中，你最愛的是?(複選)', N'美式漢堡;牛肉麵;中華炒飯;酸辣湯麵', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (7, 3, N'單選題', N'以下飲料中，你最愛的是?', N'酸辣湯麵;義大利麵;烏醋麵;日式拉麵', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (8, 3, N'文字', N'你最愛的食物是?', N'', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (9, 3, N'單選題', N'你有多常外帶食物?', N'不外帶;偶爾外帶;經常外帶;必須外帶', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (10, 3, N'單選題', N'酸甜苦辣，你偏向?', N'酸;甜;苦;辣', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (11, 4, N'單選題', N'你滿意現在的收入嗎?', N'滿意;不滿意', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (12, 5, N'單選題', N'你心中的知心好友有幾位?', N'3位以下;7位以下;12位以下;我很厲害', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (13, 5, N'單選題', N'你目前的好友總數?', N'30位左右;150位左右;300位左右;500位以上', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (14, 5, N'單選題', N'你可以隨時找到朋友出門逛街?', N'可以;不可以', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (15, 5, N'單選題', N'你滿意自己的交友圈?', N'不滿意;普通;滿意', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (16, 5, N'單選題', N'現在有難時，你覺得你有朋友可以馬上來幫助你?', N'沒有;不一定;一定有', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (17, 5, N'文字', N'你會如何改善的交友情況?', N'', N'0')
+GO
+INSERT [dbo].[QuestionnaireDetails] ([QDID], [QuestionnaireID], [QuestionType], [Question], [QOption], [Required]) VALUES (20, 1, N'單選題', N'Test2', N'123;456;789;0', N'0')
+GO
+SET IDENTITY_INSERT [dbo].[QuestionnaireDetails] OFF
+GO
+INSERT [dbo].[Survey] ([UserInfoID], [QuestionnaireID], [Caption], [CreatDate], [EndDate]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', 1, N'旅行調查', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[Survey] ([UserInfoID], [QuestionnaireID], [Caption], [CreatDate], [EndDate]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', 2, N'居住調查', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[Survey] ([UserInfoID], [QuestionnaireID], [Caption], [CreatDate], [EndDate]) VALUES (N'5995d775-91e6-498c-9b8a-b80c43c899c0', 2, N'居住調查', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[Survey] ([UserInfoID], [QuestionnaireID], [Caption], [CreatDate], [EndDate]) VALUES (N'61059976-2631-4930-8147-2489d353d689', 3, N'飲食調查', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[Survey] ([UserInfoID], [QuestionnaireID], [Caption], [CreatDate], [EndDate]) VALUES (N'774eac4f-15f7-404b-a941-86b453a3d48c', 4, N'收入調查', CAST(N'2021-10-24T00:00:00.000' AS DateTime), CAST(N'2021-11-30T00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[Survey] ([UserInfoID], [QuestionnaireID], [Caption], [CreatDate], [EndDate]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', 5, N'人際關係調查', CAST(N'2021-10-24T00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', 1, N'德國')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', 1, N'新加坡')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', 1, N'我是文字區塊1')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', 2, N'西班牙;法國')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', 2, N'3')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'5995d775-91e6-498c-9b8a-b80c43c899c0', 2, N'西班牙;韓國')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'5995d775-91e6-498c-9b8a-b80c43c899c0', 2, N'5')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'61059976-2631-4930-8147-2489d353d689', 3, N'美式漢堡;牛肉麵;中華炒飯')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'61059976-2631-4930-8147-2489d353d689', 3, N'酸辣湯麵')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'61059976-2631-4930-8147-2489d353d689', 3, N'我是文字區塊2')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'61059976-2631-4930-8147-2489d353d689', 3, N'偶爾外帶')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'61059976-2631-4930-8147-2489d353d689', 3, N'酸')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'774eac4f-15f7-404b-a941-86b453a3d48c', 4, N'滿意')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', 5, N'3位以下')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', 5, N'30位左右')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', 5, N'可以')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', 5, N'普通')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', 5, N'不一定')
+GO
+INSERT [dbo].[SurveyDetails] ([UserInfoID], [QuestionnaireID], [Answer]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', 5, N'我是文字區塊3')
+GO
+INSERT [dbo].[UserInfo] ([UserInfoID], [Name], [MobilePhone], [Email], [Age]) VALUES (N'61059976-2631-4930-8147-2489d353d689', N'造梅西', N'2299678432', N'allcometest@gmail.com', N'31')
+GO
+INSERT [dbo].[UserInfo] ([UserInfoID], [Name], [MobilePhone], [Email], [Age]) VALUES (N'aad77757-aa6f-4a86-95c4-3be52baa698d', N'楊蓉蓉', N'4525298686', N'shecometest@gmail.com', N'24')
+GO
+INSERT [dbo].[UserInfo] ([UserInfoID], [Name], [MobilePhone], [Email], [Age]) VALUES (N'774eac4f-15f7-404b-a941-86b453a3d48c', N'川易', N'3012998934', N'hecometest@gmail.com', N'29')
+GO
+INSERT [dbo].[UserInfo] ([UserInfoID], [Name], [MobilePhone], [Email], [Age]) VALUES (N'5995d775-91e6-498c-9b8a-b80c43c899c0', N'林小美', N'1123345678', N'youcometest@gmail.com', N'28')
+GO
+INSERT [dbo].[UserInfo] ([UserInfoID], [Name], [MobilePhone], [Email], [Age]) VALUES (N'7aac6137-3b35-453b-a2f6-d6801280a04a', N'陳大天', N'0912345678', N'icometest@gmail.com', N'35')
+GO
+ALTER TABLE [dbo].[AcInfo] ADD  CONSTRAINT [DF_AcInfo_AcInfoID]  DEFAULT (newid()) FOR [AcInfoID]
+GO
+ALTER TABLE [dbo].[Survey] ADD  CONSTRAINT [DF_Survey_UserInfoID]  DEFAULT (newid()) FOR [UserInfoID]
+GO
+ALTER TABLE [dbo].[SurveyDetails] ADD  CONSTRAINT [DF_SurveyDetails_UserInfoID]  DEFAULT (newid()) FOR [UserInfoID]
+GO
+ALTER TABLE [dbo].[UserInfo] ADD  CONSTRAINT [DF_UserInfo_UserInfoID]  DEFAULT (newid()) FOR [UserInfoID]
+GO
+ALTER TABLE [dbo].[QuestionnaireDetails]  WITH CHECK ADD  CONSTRAINT [FK_QuestionnaireDetails_Questionnaire] FOREIGN KEY([QuestionnaireID])
+REFERENCES [dbo].[Questionnaire] ([QuestionnaireID])
+GO
+ALTER TABLE [dbo].[QuestionnaireDetails] CHECK CONSTRAINT [FK_QuestionnaireDetails_Questionnaire]
+GO
+ALTER TABLE [dbo].[Survey]  WITH CHECK ADD  CONSTRAINT [FK_Survey_Questionnaire] FOREIGN KEY([QuestionnaireID])
+REFERENCES [dbo].[Questionnaire] ([QuestionnaireID])
+GO
+ALTER TABLE [dbo].[Survey] CHECK CONSTRAINT [FK_Survey_Questionnaire]
+GO
+ALTER TABLE [dbo].[Survey]  WITH CHECK ADD  CONSTRAINT [FK_Survey_UserInfo] FOREIGN KEY([UserInfoID])
+REFERENCES [dbo].[UserInfo] ([UserInfoID])
+GO
+ALTER TABLE [dbo].[Survey] CHECK CONSTRAINT [FK_Survey_UserInfo]
+GO
+ALTER TABLE [dbo].[SurveyDetails]  WITH CHECK ADD  CONSTRAINT [FK_SurveyDetails_Questionnaire] FOREIGN KEY([QuestionnaireID])
+REFERENCES [dbo].[Questionnaire] ([QuestionnaireID])
+GO
+ALTER TABLE [dbo].[SurveyDetails] CHECK CONSTRAINT [FK_SurveyDetails_Questionnaire]
+GO
+ALTER TABLE [dbo].[SurveyDetails]  WITH CHECK ADD  CONSTRAINT [FK_SurveyDetails_UserInfo] FOREIGN KEY([UserInfoID])
+REFERENCES [dbo].[UserInfo] ([UserInfoID])
+GO
+ALTER TABLE [dbo].[SurveyDetails] CHECK CONSTRAINT [FK_SurveyDetails_UserInfo]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[51] 4[15] 2[18] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "UserInfo"
+            Begin Extent = 
+               Top = 22
+               Left = 393
+               Bottom = 243
+               Right = 614
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Survey"
+            Begin Extent = 
+               Top = 56
+               Left = 39
+               Bottom = 299
+               Right = 270
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "SurveyDetails"
+            Begin Extent = 
+               Top = 24
+               Left = 783
+               Bottom = 208
+               Right = 1027
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Questionnaire"
+            Begin Extent = 
+               Top = 262
+               Left = 383
+               Bottom = 510
+               Right = 628
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "QuestionnaireDetails"
+            Begin Extent = 
+               Top = 241
+               Left = 771
+               Bottom = 495
+               Right = 1008
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+        ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Survey_View'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane2', @value=N' Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Survey_View'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=2 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Survey_View'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "Survey"
+            Begin Extent = 
+               Top = 14
+               Left = 107
+               Bottom = 241
+               Right = 375
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "UserInfo"
+            Begin Extent = 
+               Top = 10
+               Left = 490
+               Bottom = 249
+               Right = 739
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'UserInfoSurvey_View'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'UserInfoSurvey_View'
+GO
+USE [master]
+GO
+ALTER DATABASE [SurveySystem] SET  READ_WRITE 
+GO
