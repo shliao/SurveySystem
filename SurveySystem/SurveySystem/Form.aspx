@@ -26,27 +26,34 @@
     <br />
     <asp:Repeater ID="reptQuestionnaire" runat="server" OnItemDataBound="reptQuestionnaire_ItemDataBound">
         <ItemTemplate>
-            <td><%# Container.ItemIndex + 1 %></td><br />
-            <asp:Literal ID="ltlQDID" runat="server" Text='<%# Eval("QDID") %>'></asp:Literal><td></td><br />
-            <td><%# Eval("QuestionType") %></td><br />
-            <td><%# Eval("Question") %></td><br />
-            
-<%--            <asp:Literal ID="ltlQDID" runat="server" Text='<%# Eval("QDID") %>'></asp:Literal>
-            <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />--%>
-            <%--<asp:Literal ID="ltlQOption" runat="server" Text='<%# Split(Eval("QuestionType").ToString(),Eval("QDID").ToString(),Eval("QOption").ToString()) %>'></asp:Literal>--%>
-            
-            <% if (Eval("QuestionType").ToString() == "單選題") {%>
-            <asp:RadioButton ID="RadioButton1" runat="server" />
-            <% } %>
-            <asp:Repeater ID="reptQOption" runat="server">
+            <%# Container.ItemIndex + 1 + "." %>
+            <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />
+            <asp:Repeater ID="reptQOption1" runat="server">
                 <ItemTemplate>
-                    <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
+                    <asp:RadioButton runat="server" Text='<%# Container.DataItem %>' />
+                </ItemTemplate>
+            </asp:Repeater>
+
+            <asp:Repeater ID="reptQOption2" runat="server">
+                <ItemTemplate>
+                    <%--<asp:RadioButton ID="rbtn1" GroupName="gender" runat="server" Text='<%# Container.DataItem %>' />--%>
+                    <input type="checkbox" value='<%# Container.DataItem %>' /><lable><%# Container.DataItem %></lable>
                 </ItemTemplate>
                 <SeparatorTemplate>
-                    <hr />
+                    <br />
                 </SeparatorTemplate>
             </asp:Repeater>
+
+            <asp:Repeater ID="reptQOption3" runat="server">
+                <ItemTemplate>
+                    <asp:TextBox runat="server" Text='<%# Container.DataItem %>'></asp:TextBox>
+                </ItemTemplate>
+            </asp:Repeater>
+
         </ItemTemplate>
+        <SeparatorTemplate>
+            <hr />
+        </SeparatorTemplate>
     </asp:Repeater>
     <br />
     <asp:Button ID="btnCancel" runat="server" Text="取消" OnClick="btnCancel_Click" />

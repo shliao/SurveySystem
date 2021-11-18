@@ -1,5 +1,7 @@
 ﻿using SurveySystem.DBsource;
+using SurveySystem.ORM.DBModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -39,57 +41,25 @@ namespace SurveySystem
 
         }
 
-        public string Split(string str)
-        {
+        //分裂字串用，已用不到
+        //public string Split(string str)
+        //{
 
-            string[] param = str.Split(';');
+        //    string[] param = str.Split(';');
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-            for (int i = 0; i < param.Length; i++)
-            {
-                sb.Append(string.Format(param[i]));
+        //    for (int i = 0; i < param.Length; i++)
+        //    {
+        //        sb.Append(string.Format(param[i]));
 
-                if (i != param.Length - 1)
-                {
-                    sb.Append("<br>");
-                }
-            }
-
-            //if (QuestionType == "單選題")
-            //{
-            //    for (int i = 0; i < param.Length; i++)
-            //    {
-            //        sb.Append(string.Format("<input type='radio' name='QOption{1}' value={0}>{0}", param[i], QDID,i));
-
-            //        if (i != param.Length - 1)
-            //        {
-            //            sb.Append("<br>");
-            //        }
-            //    }
-            //}
-            //else if (QuestionType == "複選題")
-            //{
-            //    for (int i = 0; i < param.Length; i++)
-            //    {
-            //        sb.Append(string.Format("<input type='radio' name='QOption{1}' value={0}>{0}", param[i], i));
-
-            //        if (i != param.Length - 1)
-            //        {
-            //            sb.Append("<br>");
-            //        }
-            //    }
-            //}
-            //else if(QuestionType == "文字")
-            //{
-            //    for (int i = 0; i < param.Length; i++)
-            //    {
-            //        sb.Append(string.Format("<input type='text' name='Text' size='50' value={0}>{0}", param[i]));
-            //    }
-            //}
-
-            return sb.ToString();
-        }
+        //        if (i != param.Length - 1)
+        //        {
+        //            sb.Append("<br>");
+        //        }
+        //    }
+        //    return sb.ToString();
+        //}
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
@@ -103,14 +73,16 @@ namespace SurveySystem
             Session["MobilePhone"] = this.txbMobilePhone.Text;
             Session["Email"] = this.txbEmail.Text;
             Session["Age"] = this.txbAge.Text;
-            Control aaa = FindControl("aaa10");
+            Control aaa = FindControl("reptQOption2");
             if (aaa != null)
             {
 
 
             }
-            //= this.Request.QueryString["QOption0"];
-            var ddd = Request.Form["fff"];
+
+            //測試取動態 object id
+            var ddd = Request.Form["gender"];
+
             Response.Redirect("ConfirmPage.aspx");
         }
 
@@ -118,28 +90,26 @@ namespace SurveySystem
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                Repeater reptQOption = (Repeater)e.Item.FindControl("reptQOption");
+                QuestionnaireDetails MyRow = (QuestionnaireDetails)e.Item.DataItem;
 
-               // DataRowView MyRow = (DataRowView)e.Item.DataItem;
-              //  MyRow["ltlQDID"].ToString();
+                Repeater reptQOption1 = e.Item.FindControl("reptQOption1") as Repeater;
+                if (reptQOption1 != null && MyRow.QuestionType == "單選題") {
 
-
-                //var sss = e.Item.FindControl("ltlQDID");
-                //var eee = Convert.ToInt32(sss);
-
-                //var rrr = ListManager.GetQuestDetailsID(eee);
-
-                //if(rrr.QuestionType == "複選題")
-                //{
-                //    RadioButton radioButton = new RadioButton();
-                //    radioButton.Text = rrr.QOption;
-                //    radioButton.ID = "radio";
-
-                //    reptQOption.DataSource = radioButton;
-                //    reptQOption.DataBind();
-
-                //}
-
+                    //reptQOption1.DataSource = 
+                    //reptQOption1.DataBind();
+                }
+                Repeater reptQOption2 = e.Item.FindControl("reptQOption2") as Repeater;
+                if (reptQOption2 != null && MyRow.QuestionType == "複選題")
+                {
+                    reptQOption2.DataSource = MyRow.QOption.Split(';');
+                    reptQOption2.DataBind();
+                }
+                Repeater reptQOption3 = e.Item.FindControl("reptQOption3") as Repeater;
+                if (reptQOption3 != null && MyRow.QuestionType == "文字")
+                {
+                    //reptQOption3.DataSource = 
+                    //reptQOption3.DataBind();
+                }
             }
         }
     }
