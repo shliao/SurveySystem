@@ -30,26 +30,27 @@
             <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />
             <asp:Repeater ID="reptQOption1" runat="server">
                 <ItemTemplate>
-                    <asp:RadioButton runat="server" Text='<%# Container.DataItem %>' />
-                </ItemTemplate>
-            </asp:Repeater>
-
-            <asp:Repeater ID="reptQOption2" runat="server">
-                <ItemTemplate>
-                    <%--<asp:RadioButton ID="rbtn1" GroupName="gender" runat="server" Text='<%# Container.DataItem %>' />--%>
-                    <input type="checkbox" value='<%# Container.DataItem %>' /><lable><%# Container.DataItem %></lable>
+                    <input type="radio" name='rdobtn' value='<%# Container.DataItem %>' />
+                    <lable><%# Container.DataItem %></lable>
                 </ItemTemplate>
                 <SeparatorTemplate>
                     <br />
                 </SeparatorTemplate>
             </asp:Repeater>
-
+            <asp:Repeater ID="reptQOption2" runat="server">
+                <ItemTemplate>
+                    <input type="checkbox" name='chkbox' value='<%# Container.DataItem %>' />
+                    <lable><%# Container.DataItem %></lable>
+                </ItemTemplate>
+                <SeparatorTemplate>
+                    <br />
+                </SeparatorTemplate>
+            </asp:Repeater>
             <asp:Repeater ID="reptQOption3" runat="server">
                 <ItemTemplate>
-                    <asp:TextBox runat="server" Text='<%# Container.DataItem %>'></asp:TextBox>
+                    <textarea name='txtbox' value='<%# Container.DataItem %>'></textarea>
                 </ItemTemplate>
             </asp:Repeater>
-
         </ItemTemplate>
         <SeparatorTemplate>
             <hr />

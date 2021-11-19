@@ -73,16 +73,16 @@ namespace SurveySystem
             Session["MobilePhone"] = this.txbMobilePhone.Text;
             Session["Email"] = this.txbEmail.Text;
             Session["Age"] = this.txbAge.Text;
-            Control aaa = FindControl("reptQOption2");
-            if (aaa != null)
-            {
+            //Control aaa = FindControl("reptQOption2");
+            //if (aaa != null)
+            //{
 
 
-            }
+            //}
 
             //測試取動態 object id
-            var ddd = Request.Form["gender"];
-
+            var ddd = Request.Form["gender"] as string;
+            
             Response.Redirect("ConfirmPage.aspx");
         }
 
@@ -95,8 +95,8 @@ namespace SurveySystem
                 Repeater reptQOption1 = e.Item.FindControl("reptQOption1") as Repeater;
                 if (reptQOption1 != null && MyRow.QuestionType == "單選題") {
 
-                    //reptQOption1.DataSource = 
-                    //reptQOption1.DataBind();
+                    reptQOption1.DataSource = MyRow.QOption.Split(';');
+                    reptQOption1.DataBind();
                 }
                 Repeater reptQOption2 = e.Item.FindControl("reptQOption2") as Repeater;
                 if (reptQOption2 != null && MyRow.QuestionType == "複選題")
@@ -107,8 +107,11 @@ namespace SurveySystem
                 Repeater reptQOption3 = e.Item.FindControl("reptQOption3") as Repeater;
                 if (reptQOption3 != null && MyRow.QuestionType == "文字")
                 {
-                    //reptQOption3.DataSource = 
-                    //reptQOption3.DataBind();
+                    if(MyRow.QuestionType == "文字" && MyRow.QOption == "")
+                    {
+                        reptQOption3.DataSource = new List<string> { "請輸入內容" };
+                        reptQOption3.DataBind();
+                    }
                 }
             }
         }
