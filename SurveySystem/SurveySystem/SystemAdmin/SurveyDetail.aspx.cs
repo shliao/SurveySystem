@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveySystem.DBsource;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,9 @@ namespace SurveySystem.SystemAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var gidtxt = this.Request.QueryString["UserInfoID"];
+            
+
 
         }
     }

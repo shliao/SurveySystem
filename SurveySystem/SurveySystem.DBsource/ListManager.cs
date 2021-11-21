@@ -1,6 +1,8 @@
 ﻿using SurveySystem.ORM.DBModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -346,6 +348,41 @@ namespace SurveySystem.DBsource
                     return null;
                 }
             }
+        }
+        public static List<Survey_View> GetUserSurveyDetails()
+        {
+            using (ContextModel context = new ContextModel())
+            {
+                try
+                {
+                    var query = (from item in context.Survey_View
+                                 orderby item.QDID descending
+                                 select item);
+
+                    var list = query.ToList();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(ex);
+                    return null;
+                }
+            }
+        }
+        public static DataTable ConvertToDataTable<T>(IList<T> data)         //List轉DataTable
+        {
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
         }
     }
 }

@@ -70,7 +70,7 @@ namespace SurveySystem.Auth
             }
             catch (Exception ex)
             {
-                Logger.WriteLog(ex);
+                Logger.Writelog(ex);
                 return null;
             }
         }
