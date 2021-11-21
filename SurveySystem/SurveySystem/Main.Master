@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>前台</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -13,6 +13,10 @@
     <form id="form1" runat="server">
         <div>
             <h1>前台</h1>
+            <asp:Literal ID="ltlLogin" runat="server"><a href="Login.aspx">後台管理</a></asp:Literal>
+            <asp:Literal ID="ltlDefault" runat="server"><a href="Default.aspx">回首頁</a></asp:Literal>
+        </div>
+        <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

@@ -75,10 +75,9 @@ namespace SurveySystem.SystemAdmin
 
                         Record.Rows.Add(dr);
                         this.GridView1.DataSource = Record;
-                        this.GridView1.DataBind();
+                        this.GridView1.DataBind();                                             
+
                     }
-
-
 
                     //tabs-4
 

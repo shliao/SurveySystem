@@ -11,7 +11,7 @@ namespace SurveySystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.TextBox1.Text = Session["fff"].ToString();
+            
         }
     }
 }

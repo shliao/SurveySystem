@@ -30,6 +30,7 @@
     <form id="form1" runat="server">
         <asp:HiddenField ID="hdnSelectedTab" runat="server" Value="0" />
         <h1>後台 - 問卷管理</h1>
+        <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" />
         <table>
             <tr>
                 <td>

@@ -30,7 +30,7 @@
             <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />
             <asp:Repeater ID="reptQOption1" runat="server">
                 <ItemTemplate>
-                    <input type="radio" name='rdobtn' value='<%# Container.DataItem %>' />
+                    <input type="radio" name='<%# Container.UniqueID %>'  value='<%# Container.DataItem %>' />
                     <lable><%# Container.DataItem %></lable>
                 </ItemTemplate>
                 <SeparatorTemplate>
@@ -39,7 +39,7 @@
             </asp:Repeater>
             <asp:Repeater ID="reptQOption2" runat="server">
                 <ItemTemplate>
-                    <input type="checkbox" name='chkbox' value='<%# Container.DataItem %>' />
+                    <input type="checkbox" name='<%# Container.UniqueID %>' value='<%# Container.DataItem %>' />
                     <lable><%# Container.DataItem %></lable>
                 </ItemTemplate>
                 <SeparatorTemplate>
@@ -48,7 +48,7 @@
             </asp:Repeater>
             <asp:Repeater ID="reptQOption3" runat="server">
                 <ItemTemplate>
-                    <textarea name='txtbox' value='<%# Container.DataItem %>'></textarea>
+                    <textarea name='<%# Container.UniqueID %>' value='<%# Container.DataItem %>'></textarea>
                 </ItemTemplate>
             </asp:Repeater>
         </ItemTemplate>

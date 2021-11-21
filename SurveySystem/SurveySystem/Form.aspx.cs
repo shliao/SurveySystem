@@ -18,6 +18,8 @@ namespace SurveySystem
         public ListManager questionnaire_View;
         public ListManager questionnaireDetails_View;
 
+        public object RadioButton1 { get; private set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string questionnaireidtxt = this.Request.QueryString["ID"];
@@ -73,16 +75,7 @@ namespace SurveySystem
             Session["MobilePhone"] = this.txbMobilePhone.Text;
             Session["Email"] = this.txbEmail.Text;
             Session["Age"] = this.txbAge.Text;
-            //Control aaa = FindControl("reptQOption2");
-            //if (aaa != null)
-            //{
 
-
-            //}
-
-            //測試取動態 object id
-            var ddd = Request.Form["gender"] as string;
-            
             Response.Redirect("ConfirmPage.aspx");
         }
 

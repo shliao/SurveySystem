@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveySystem.ORM", "SurveyS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveySystem.DBsource", "SurveySystem.DBsource\SurveySystem.DBsource.csproj", "{4771AD73-0657-460F-BACF-DE63C19AFD7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveySystem.Auth", "SurveySystem.Auth\SurveySystem.Auth.csproj", "{8BBE847D-CD91-4312-A6D4-BAEFB3773D49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4771AD73-0657-460F-BACF-DE63C19AFD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4771AD73-0657-460F-BACF-DE63C19AFD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4771AD73-0657-460F-BACF-DE63C19AFD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BBE847D-CD91-4312-A6D4-BAEFB3773D49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BBE847D-CD91-4312-A6D4-BAEFB3773D49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BBE847D-CD91-4312-A6D4-BAEFB3773D49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BBE847D-CD91-4312-A6D4-BAEFB3773D49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

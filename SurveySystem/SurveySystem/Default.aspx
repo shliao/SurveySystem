@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SurveySystem.Default" %>
 
+<%@ Register Src="~/UserControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -28,9 +31,10 @@
             <asp:TemplateField HeaderText="觀看統計">
                 <ItemTemplate>
                     <a href="Stastic.aspx?ID=<%# Eval("QuestionnaireID")%>">
-                    <p>前往</p>
+                        <p>前往</p>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <uc1:ucPager runat="server" ID="ucPager" PageSize="10" CurrentPage="1" TotalSize="10" Url="Default.aspx" />
 </asp:Content>

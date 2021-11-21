@@ -28,6 +28,26 @@ namespace SurveySystem.DBsource
                 }
             }
         }
+        public static List<Questionnaire> GetQuestionnairebyKeyword(string keyword)
+        {
+            using (ContextModel context = new ContextModel())
+            {
+                try
+                {
+                    var query = (from item in context.Questionnaire
+                                 where item.Caption.Contains(keyword)
+                                 select item);
+
+                    var list = query.ToList();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(ex);
+                    return null;
+                }
+            }
+        }
         public static List<Questionnaire> GetQuestionnaireByDate(DateTime startTime, DateTime endTime)
         {
             using (ContextModel context = new ContextModel())
