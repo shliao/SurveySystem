@@ -76,8 +76,76 @@ namespace SurveySystem
             Session["Email"] = this.txbEmail.Text;
             Session["Age"] = this.txbAge.Text;
 
+            string questionnaireidtxt = this.Request.QueryString["ID"];
+            int questionnaireid = int.Parse(questionnaireidtxt);
+            var reptQ = ListManager.GetQuestionnaireDetails(questionnaireid);
+
+            if (Request.Form["radioQDID"] != null)
+            {
+                //string aaa = Request.Form[].ToString();
+                //System.Diagnostics.Debug.WriteLine(aaa);
+
+            }
+
+
+            //System.Diagnostics.Debug.WriteLine(); Console 輸出，檢查值
+            foreach (var item in reptQ)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Question);
+                if (item.QuestionType == "單選題")
+                {
+                    //System.Diagnostics.Debug.WriteLine(item.QOption);
+                    foreach (string o in item.QOption.Split(';'))
+                    {
+
+                        var encode = String.Format("{0}-{1}", item.Question, o);
+                        //System.Diagnostics.Debug.WriteLine(item.Question + "-"+o);
+                        System.Diagnostics.Debug.WriteLine(encode);
+                        //var formInput = Request.Form[encode];
+                        //if (formInput != null) {
+                        //    //Session[encode] = formInput;
+
+                        //}
+                    }
+                }
+                else if (item.QuestionType == "複選題")
+                {
+                    foreach (string o in item.QOption.Split(';'))
+                    {
+                        var encode = String.Format("{0}-{1}", item.Question, o);
+                        System.Diagnostics.Debug.WriteLine(encode);
+                    }
+                }
+                else if (item.QuestionType == "文字")
+                {
+                    foreach (var o in item.QOption)
+                    {
+                        var encode = String.Format("{0}-{1}", item.Question, o);
+                        System.Diagnostics.Debug.WriteLine(encode);
+                    }
+                }
+
+            }
+
             Response.Redirect("ConfirmPage.aspx");
         }
+
+        public string getRadio(string Qid)
+        {
+            string Qcid = "radio" + Qid;
+            return Qcid;
+        }
+        public string getCheck(string Qid)
+        {
+            string Qcid = "ckcbox" + Qid;
+            return Qcid;
+        }
+        public string getText(string Qid)
+        {
+            string Qcid = "txtbox" + Qid;
+            return Qcid;
+        }
+
 
         protected void reptQuestionnaire_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -86,8 +154,8 @@ namespace SurveySystem
                 QuestionnaireDetails MyRow = (QuestionnaireDetails)e.Item.DataItem;
 
                 Repeater reptQOption1 = e.Item.FindControl("reptQOption1") as Repeater;
-                if (reptQOption1 != null && MyRow.QuestionType == "單選題") {
-
+                if (reptQOption1 != null && MyRow.QuestionType == "單選題")
+                {
                     reptQOption1.DataSource = MyRow.QOption.Split(';');
                     reptQOption1.DataBind();
                 }
@@ -100,7 +168,7 @@ namespace SurveySystem
                 Repeater reptQOption3 = e.Item.FindControl("reptQOption3") as Repeater;
                 if (reptQOption3 != null && MyRow.QuestionType == "文字")
                 {
-                    if(MyRow.QuestionType == "文字" && MyRow.QOption == "")
+                    if (MyRow.QuestionType == "文字" && MyRow.QOption == "")
                     {
                         reptQOption3.DataSource = new List<string> { "請輸入內容" };
                         reptQOption3.DataBind();

@@ -27,10 +27,11 @@
     <asp:Repeater ID="reptQuestionnaire" runat="server" OnItemDataBound="reptQuestionnaire_ItemDataBound">
         <ItemTemplate>
             <%# Container.ItemIndex + 1 + "." %>
-            <asp:Literal ID="ltlQuestion" runat="server" Text='<%# Eval("Question") %>'></asp:Literal><br />
+            <asp:Literal ID="ltlQuestion" runat="server" Text='<%#Eval("Question") %>'></asp:Literal><br />
+
             <asp:Repeater ID="reptQOption1" runat="server">
                 <ItemTemplate>
-                    <input type="radio" name='<%# Container.UniqueID %>'  value='<%# Container.DataItem %>' />
+                    <input type="radio" name='<%#  getRadio(((RepeaterItem)Container.Parent.Parent).ItemIndex.ToString()) %>'  value='<%# Container.DataItem %>' />
                     <lable><%# Container.DataItem %></lable>
                 </ItemTemplate>
                 <SeparatorTemplate>
@@ -39,7 +40,7 @@
             </asp:Repeater>
             <asp:Repeater ID="reptQOption2" runat="server">
                 <ItemTemplate>
-                    <input type="checkbox" name='<%# Container.UniqueID %>' value='<%# Container.DataItem %>' />
+                    <input type="checkbox" name='<%# getCheck(((RepeaterItem)Container.Parent.Parent).ItemIndex.ToString()) %>' value='<%# Container.DataItem %>' />
                     <lable><%# Container.DataItem %></lable>
                 </ItemTemplate>
                 <SeparatorTemplate>
@@ -48,7 +49,7 @@
             </asp:Repeater>
             <asp:Repeater ID="reptQOption3" runat="server">
                 <ItemTemplate>
-                    <textarea name='<%# Container.UniqueID %>' value='<%# Container.DataItem %>'></textarea>
+                    <textarea name='<%# getText(((RepeaterItem)Container.Parent.Parent).ItemIndex.ToString()) %>' value='<%# Container.DataItem %>'></textarea>
                 </ItemTemplate>
             </asp:Repeater>
         </ItemTemplate>

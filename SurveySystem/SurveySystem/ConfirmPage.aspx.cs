@@ -11,7 +11,8 @@ namespace SurveySystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            string aaa = Request.Form["getName(((RepeaterItem)Container.Parent.Parent).DataItem.ToString(), Container.DataItem.ToString())"];
+            System.Diagnostics.Debug.WriteLine(aaa);
         }
     }
 }
