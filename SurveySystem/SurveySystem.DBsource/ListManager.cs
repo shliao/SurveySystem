@@ -1,9 +1,11 @@
 ﻿using SurveySystem.ORM.DBModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -151,7 +153,7 @@ namespace SurveySystem.DBsource
                     return null;
                 }
             }
-        }
+        }       
         public static void CreatQuestionnaire(Questionnaire creatquestionnaire)
         {
             try
@@ -159,6 +161,51 @@ namespace SurveySystem.DBsource
                 using (ContextModel context = new ContextModel())
                 {
                     context.Questionnaire.Add(creatquestionnaire);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+            }
+        }
+        public static void CreatUserInfo(UserInfo userInfo)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    context.UserInfo.Add(userInfo);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+            }
+        }
+        public static void AddSurveyDetails(SurveyDetails surveyDetails)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    context.SurveyDetails.Add(surveyDetails);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+            }
+        }
+        public static void AddSurvey(Survey survey)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    context.Survey.Add(survey);
                     context.SaveChanges();
                 }
             }
