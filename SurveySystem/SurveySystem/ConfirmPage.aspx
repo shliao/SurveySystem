@@ -12,7 +12,7 @@
     <br />
     <asp:Literal ID="ltlQContent" runat="server"></asp:Literal>
     <br />
-    <asp:Literal ID="ltlGID" runat="server"></asp:Literal>
+    <asp:Literal ID="ltlGID" runat="server" Visible="false"></asp:Literal>
     <asp:Literal ID="ltlName" runat="server">姓名</asp:Literal>
     <asp:TextBox ID="txbName" runat="server" ReadOnly="true"></asp:TextBox>
     <br />
