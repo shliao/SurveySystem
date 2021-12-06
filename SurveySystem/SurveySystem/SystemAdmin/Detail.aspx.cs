@@ -61,23 +61,9 @@ namespace SurveySystem.SystemAdmin
                     //tabs-3
                     var userInfoSurvey = ListManager.GetSurveyUser(questionnaireid);
 
-                    if (userInfoSurvey != null)
-                    {
-                        DataTable Record = new DataTable();
-                        Record.Columns.Add("UserInfoID");
-                        Record.Columns.Add("ltlName");
-                        Record.Columns.Add("CreatDate");
+                    this.GridView1.DataSource = userInfoSurvey;
+                    this.GridView1.DataBind();
 
-                        DataRow dr = Record.NewRow();
-                        dr["UserInfoID"] = userInfoSurvey.UserInfoID;
-                        dr["ltlName"] = userInfoSurvey.Name;
-                        dr["CreatDate"] = userInfoSurvey.CreatDate;
-
-                        Record.Rows.Add(dr);
-                        this.GridView1.DataSource = Record;
-                        this.GridView1.DataBind();                                             
-
-                    }
 
                     //tabs-4
 

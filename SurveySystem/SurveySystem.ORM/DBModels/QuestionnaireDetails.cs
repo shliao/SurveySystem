@@ -8,6 +8,12 @@ namespace SurveySystem.ORM.DBModels
 
     public partial class QuestionnaireDetails
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public QuestionnaireDetails()
+        {
+            SurveyDetails = new HashSet<SurveyDetails>();
+        }
+
         [Key]
         public int QDID { get; set; }
 
@@ -30,5 +36,8 @@ namespace SurveySystem.ORM.DBModels
         public string Required { get; set; }
 
         public virtual Questionnaire Questionnaire { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SurveyDetails> SurveyDetails { get; set; }
     }
 }

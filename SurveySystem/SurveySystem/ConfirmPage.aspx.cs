@@ -112,6 +112,7 @@ namespace SurveySystem
 
                     SurveyDetails surveyDetails = new SurveyDetails();
 
+                    surveyDetails.QDID = Int32.Parse(Session["QDID"].ToString());
                     surveyDetails.UserInfoID = Guid.Parse(gid);
                     surveyDetails.QuestionnaireID = questionnaireid;
                     surveyDetails.Answer = answer;
@@ -130,6 +131,7 @@ namespace SurveySystem
 
                     SurveyDetails surveyDetails = new SurveyDetails();
 
+                    surveyDetails.QDID = Int32.Parse(Session["QDID"].ToString());
                     surveyDetails.UserInfoID = Guid.Parse(gid);
                     surveyDetails.QuestionnaireID = questionnaireid;
                     surveyDetails.Answer = answer;
@@ -148,6 +150,7 @@ namespace SurveySystem
 
                     SurveyDetails surveyDetails = new SurveyDetails();
 
+                    surveyDetails.QDID = Int32.Parse(Session["QDID"].ToString());
                     surveyDetails.UserInfoID = Guid.Parse(gid);
                     surveyDetails.QuestionnaireID = questionnaireid;
                     surveyDetails.Answer = answer;

@@ -20,6 +20,7 @@ namespace SurveySystem.ORM.DBModels
         public virtual DbSet<Survey> Survey { get; set; }
         public virtual DbSet<SurveyDetails> SurveyDetails { get; set; }
         public virtual DbSet<Survey_View> Survey_View { get; set; }
+        public virtual DbSet<SurveyD_QuestD_View> SurveyD_QuestD_View { get; set; }
         public virtual DbSet<UserInfoSurvey_View> UserInfoSurvey_View { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -42,9 +43,9 @@ namespace SurveySystem.ORM.DBModels
                 .WithRequired(e => e.Questionnaire)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Questionnaire>()
+            modelBuilder.Entity<QuestionnaireDetails>()
                 .HasMany(e => e.SurveyDetails)
-                .WithRequired(e => e.Questionnaire)
+                .WithRequired(e => e.QuestionnaireDetails)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserInfo>()

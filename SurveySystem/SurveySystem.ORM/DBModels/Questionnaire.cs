@@ -14,7 +14,6 @@ namespace SurveySystem.ORM.DBModels
         {
             QuestionnaireDetails = new HashSet<QuestionnaireDetails>();
             Survey = new HashSet<Survey>();
-            SurveyDetails = new HashSet<SurveyDetails>();
         }
 
         public int QuestionnaireID { get; set; }
@@ -40,8 +39,5 @@ namespace SurveySystem.ORM.DBModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Survey> Survey { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SurveyDetails> SurveyDetails { get; set; }
     }
 }

@@ -48,6 +48,7 @@ namespace SurveySystem
             foreach (var item in reptQ)
             {
                 this.PlaceHolder1.Controls.Add(new LiteralControl(item.QDID + "."));
+                Session["QDID"] = item.QDID;
 
                 Literal ltquestionName = new Literal();
                 ltquestionName.ID = "questionName" + item.QDID;

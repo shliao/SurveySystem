@@ -57,6 +57,7 @@
     <Compile Include="DBModels\QuestionnaireDetails.cs" />
     <Compile Include="DBModels\Survey.cs" />
     <Compile Include="DBModels\SurveyDetails.cs" />
+    <Compile Include="DBModels\SurveyD_QuestD_View.cs" />
     <Compile Include="DBModels\Survey_View.cs" />
     <Compile Include="DBModels\UserInfo.cs" />
     <Compile Include="DBModels\UserInfoSurvey_View.cs" />

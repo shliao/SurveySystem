@@ -114,7 +114,27 @@ namespace SurveySystem.DBsource
                 }
             }
         }
-        public static UserInfoSurvey_View GetSurveyUser(int userinfoid)
+        public static UserInfoSurvey_View GetSurveyID(Guid userinfoid)
+        {
+            using (ContextModel context = new ContextModel())
+            {
+                try
+                {
+                    var query = (from item in context.UserInfoSurvey_View
+                                 where item.UserInfoID == userinfoid
+                                 select item).FirstOrDefault();
+
+                    var list = query;
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(ex);
+                    return null;
+                }
+            }
+        }
+        public static List<UserInfoSurvey_View> GetSurveyUser(int userinfoid)
         {
             using (ContextModel context = new ContextModel())
             {
@@ -122,9 +142,29 @@ namespace SurveySystem.DBsource
                 {
                     var query = (from item in context.UserInfoSurvey_View
                                  where item.QuestionnaireID == userinfoid
-                                 select item).FirstOrDefault();
+                                 select item);
 
-                    var list = query;
+                    var list = query.ToList();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(ex);
+                    return null;
+                }
+            }
+        }
+        public static List<SurveyD_QuestD_View> GetSurvey(int userinfoid, Guid guid)
+        {
+            using (ContextModel context = new ContextModel())
+            {
+                try
+                {
+                    var query = (from item in context.SurveyD_QuestD_View
+                                 where item.QuestionnaireID == userinfoid && item.UserInfoID == guid
+                                 select item);
+
+                    var list = query.ToList();
                     return list;
                 }
                 catch (Exception ex)
@@ -394,6 +434,72 @@ namespace SurveySystem.DBsource
                     Logger.WriteLog(ex);
                     return null;
                 }
+            }
+        }
+        public static void CreatFAQ(FAQ faq)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    context.FAQ.Add(faq);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+            }
+        }
+        public static void DeleteFAQ(string name)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var obj = context.FAQ.Where
+                              (k => k.CustomName == name).FirstOrDefault();
+
+                    if (obj != null)
+                    {
+                        context.FAQ.Remove(obj);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+            }
+        }
+        public static bool UpdateFAQ(string customname, FAQ questionnaire)
+        {
+            try
+            {
+                using (ContextModel context = new ContextModel())
+                {
+                    var query = (from item in context.FAQ
+                                 where item.CustomName == customname
+                                 select item).FirstOrDefault();
+                    if (query != null)
+                    {
+                        query.CustomName = questionnaire.CustomName;
+                        query.FAQType = questionnaire.FAQType;
+                        query.Question = questionnaire.Question;
+                        query.FOption = questionnaire.FOption;
+
+                        context.SaveChanges();
+                        return true;
+                    }
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return false;
             }
         }
         public static List<Survey_View> GetUserSurveyDetails()

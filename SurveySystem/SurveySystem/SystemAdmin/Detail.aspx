@@ -97,7 +97,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="姓名">
                         <ItemTemplate>
-                            <asp:Literal ID="ltlName" runat="server" Text='<%# Eval("ltlName") %>'></asp:Literal>
+                            <asp:Literal ID="ltlName" runat="server" Text='<%# Eval("Name") %>'></asp:Literal>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="填寫時間">

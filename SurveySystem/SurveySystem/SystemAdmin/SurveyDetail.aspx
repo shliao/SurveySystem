@@ -9,19 +9,21 @@
         </ul>
         <div id="tabs-1">
             <asp:Literal ID="Literal1" runat="server">姓名：</asp:Literal>
-            <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtName" runat="server" ReadOnly="true"></asp:TextBox>
             <asp:Literal ID="Literal2" runat="server">手機：</asp:Literal>
-            <asp:TextBox ID="txtMobile" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtMobile" runat="server" ReadOnly="true"></asp:TextBox>
             <br />
             <asp:Literal ID="Literal3" runat="server">Email：</asp:Literal>
-            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtEmail" runat="server" ReadOnly="true"></asp:TextBox>
             <asp:Literal ID="Literal4" runat="server">年齡：</asp:Literal>
-            <asp:TextBox ID="txtAge" runat="server"></asp:TextBox>
-            <img src="../Photo/Working.jpg" />
+            <asp:TextBox ID="txtAge" runat="server" ReadOnly="true"></asp:TextBox>
             <br />
-            <asp:Literal ID="ltlCreatDate" runat="server">填寫時間：</asp:Literal>
+            <asp:Literal ID="Literal5" runat="server">填寫時間：</asp:Literal>
+            <asp:Literal ID="ltlCreatDate" runat="server"></asp:Literal>
             <br />
-
+            <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
+            <br />
+            <asp:Literal ID="ltlAmount" runat="server"></asp:Literal>
         </div>
     </div>
 </asp:Content>

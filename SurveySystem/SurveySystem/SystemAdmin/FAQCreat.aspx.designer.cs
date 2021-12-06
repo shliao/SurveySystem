@@ -11,7 +11,7 @@ namespace SurveySystem.SystemAdmin
 {
 
 
-    public partial class SurveyDetail
+    public partial class FAQCreat
     {
 
         /// <summary>
@@ -24,13 +24,13 @@ namespace SurveySystem.SystemAdmin
         protected global::System.Web.UI.WebControls.Literal Literal1;
 
         /// <summary>
-        /// txtName 控制項。
+        /// txbCustomName 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
+        protected global::System.Web.UI.WebControls.TextBox txbCustomName;
 
         /// <summary>
         /// Literal2 控制項。
@@ -42,13 +42,13 @@ namespace SurveySystem.SystemAdmin
         protected global::System.Web.UI.WebControls.Literal Literal2;
 
         /// <summary>
-        /// txtMobile 控制項。
+        /// ddlFAQType 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMobile;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFAQType;
 
         /// <summary>
         /// Literal3 控制項。
@@ -60,13 +60,13 @@ namespace SurveySystem.SystemAdmin
         protected global::System.Web.UI.WebControls.Literal Literal3;
 
         /// <summary>
-        /// txtEmail 控制項。
+        /// txbQuestion 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txbQuestion;
 
         /// <summary>
         /// Literal4 控制項。
@@ -78,48 +78,39 @@ namespace SurveySystem.SystemAdmin
         protected global::System.Web.UI.WebControls.Literal Literal4;
 
         /// <summary>
-        /// txtAge 控制項。
+        /// txbFOption 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAge;
+        protected global::System.Web.UI.WebControls.TextBox txbFOption;
 
         /// <summary>
-        /// Literal5 控制項。
+        /// btnCancle 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal5;
+        protected global::System.Web.UI.WebControls.Button btnCancle;
 
         /// <summary>
-        /// ltlCreatDate 控制項。
+        /// btnSave 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlCreatDate;
+        protected global::System.Web.UI.WebControls.Button btnSave;
 
         /// <summary>
-        /// PlaceHolder1 控制項。
+        /// ltlMsg 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
-
-        /// <summary>
-        /// ltlAmount 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlAmount;
+        protected global::System.Web.UI.WebControls.Literal ltlMsg;
     }
 }

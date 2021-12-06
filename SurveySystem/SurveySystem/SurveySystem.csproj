@@ -87,7 +87,9 @@
     <Content Include="Script\jQuery-min-3.6.0.js" />
     <Content Include="Stastic.aspx" />
     <Content Include="SystemAdmin\Detail.aspx" />
-    <Content Include="SystemAdmin\FAQ.aspx" />
+    <Content Include="SystemAdmin\FAQEadit.aspx" />
+    <Content Include="SystemAdmin\FAQList.aspx" />
+    <Content Include="SystemAdmin\FAQCreat.aspx" />
     <Content Include="SystemAdmin\List.aspx" />
     <Content Include="SystemAdmin\SurveyDetail.aspx" />
     <Content Include="UserControls\ucPager.ascx" />
@@ -154,12 +156,26 @@
     <Compile Include="SystemAdmin\Detail.aspx.designer.cs">
       <DependentUpon>Detail.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemAdmin\FAQ.aspx.cs">
-      <DependentUpon>FAQ.aspx</DependentUpon>
+    <Compile Include="SystemAdmin\FAQEadit.aspx.cs">
+      <DependentUpon>FAQEadit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemAdmin\FAQ.aspx.designer.cs">
-      <DependentUpon>FAQ.aspx</DependentUpon>
+    <Compile Include="SystemAdmin\FAQEadit.aspx.designer.cs">
+      <DependentUpon>FAQEadit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemAdmin\FAQList.aspx.cs">
+      <DependentUpon>FAQList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemAdmin\FAQList.aspx.designer.cs">
+      <DependentUpon>FAQList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemAdmin\FAQCreat.aspx.cs">
+      <DependentUpon>FAQCreat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemAdmin\FAQCreat.aspx.designer.cs">
+      <DependentUpon>FAQCreat.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemAdmin\List.aspx.cs">
       <DependentUpon>List.aspx</DependentUpon>
