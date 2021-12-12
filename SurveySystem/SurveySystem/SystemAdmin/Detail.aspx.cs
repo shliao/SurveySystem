@@ -66,7 +66,8 @@ namespace SurveySystem.SystemAdmin
 
 
                     //tabs-4
-
+                    this.reptQuestionnaire.DataSource = ListManager.GetQuestionnaireDetails(questionnaireid);
+                    this.reptQuestionnaire.DataBind();
 
                 }
             }
@@ -371,6 +372,36 @@ namespace SurveySystem.SystemAdmin
             HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
             HttpContext.Current.Response.Write(sw);
             HttpContext.Current.Response.End();
+        }
+
+        protected void reptQuestionnaire_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                QuestionnaireDetails MyRow = (QuestionnaireDetails)e.Item.DataItem;
+
+                Repeater reptQOption1 = e.Item.FindControl("reptQOption1") as Repeater;
+                if (reptQOption1 != null && MyRow.QuestionType == "單選題")
+                {
+                    reptQOption1.DataSource = MyRow.QOption.Split(';');
+                    reptQOption1.DataBind();
+                }
+                Repeater reptQOption2 = e.Item.FindControl("reptQOption2") as Repeater;
+                if (reptQOption2 != null && MyRow.QuestionType == "複選題")
+                {
+                    reptQOption2.DataSource = MyRow.QOption.Split(';');
+                    reptQOption2.DataBind();
+                }
+                Repeater reptQOption3 = e.Item.FindControl("reptQOption3") as Repeater;
+                if (reptQOption3 != null && MyRow.QuestionType == "文字")
+                {
+                    if (MyRow.QuestionType == "文字" && MyRow.QOption == "")
+                    {
+                        reptQOption3.DataSource = new List<string> { "" };
+                        reptQOption3.DataBind();
+                    }
+                }
+            }
         }
     }
 }

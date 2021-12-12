@@ -114,7 +114,39 @@
             </asp:GridView>
         </div>
         <div id="tabs-4">
-            <img src="../Photo/Working.jpg" />
+           
+        <asp:Repeater ID="reptQuestionnaire" runat="server" OnItemDataBound="reptQuestionnaire_ItemDataBound">
+            <ItemTemplate>
+                <%# Container.ItemIndex + 1 + "." %>
+                <asp:Literal ID="ltlQuestion" runat="server" Text='<%#Eval("Question") %>'></asp:Literal><br />
+
+                <asp:Repeater ID="reptQOption1" runat="server">
+                    <ItemTemplate>
+                        <p><%# Container.DataItem %></p>
+                    </ItemTemplate>
+                    <SeparatorTemplate>
+                        <br />
+                    </SeparatorTemplate>
+                </asp:Repeater>
+                <asp:Repeater ID="reptQOption2" runat="server">
+                    <ItemTemplate>
+                        <p><%# Container.DataItem %></p>
+                    </ItemTemplate>
+                    <SeparatorTemplate>
+                        <br />
+                    </SeparatorTemplate>
+                </asp:Repeater>
+                <asp:Repeater ID="reptQOption3" runat="server">
+                    <ItemTemplate>
+                        <p>-</p>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ItemTemplate>
+
+            <SeparatorTemplate>
+                <hr />
+            </SeparatorTemplate>
+        </asp:Repeater>
         </div>
     </div>
 </asp:Content>

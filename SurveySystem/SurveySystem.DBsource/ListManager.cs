@@ -193,7 +193,27 @@ namespace SurveySystem.DBsource
                     return null;
                 }
             }
-        }       
+        }
+        public static List<SurveyDetails> GetSurveyDetails(int questionnaireid)
+        {
+            using (ContextModel context = new ContextModel())
+            {
+                try
+                {
+                    var query = (from item in context.SurveyDetails
+                                 where item.QuestionnaireID == questionnaireid
+                                 select item);
+
+                    var list = query.ToList();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(ex);
+                    return null;
+                }
+            }
+        }
         public static void CreatQuestionnaire(Questionnaire creatquestionnaire)
         {
             try
